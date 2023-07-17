@@ -26,7 +26,7 @@ public class SecurityConfiguration {
                 .cors()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/ecommerce/auth/**").permitAll()
+                .requestMatchers("/ecommerce/dashboard/ecommerce-layout/all", "/ecommerce/auth/**").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().authenticated()
                 .and()

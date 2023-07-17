@@ -52,18 +52,18 @@ public class UserService {
 
             findUser.setFullname(user.getFullname());
             findUser.setEmail(user.getEmail());
-            findUser.setPassword(user.getPassword());
+            findUser.setPassword(passwordEncoder.encode(user.getPassword()));
 
             userUpdate = userRepository.save(findUser);
 
         }catch (DataAccessException e){
-            response.put("message","Error al actualizar Usuario");
+            response.put("message","Error Updating Usuario");
             response.put("error",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<Map<String,Object>>(response, INTERNAL_SERVER_ERROR);
         }
 
         response.put("message","User Updated Successfully");
-        response.put("user",userUpdate);
+        response.put("data",userUpdate);
 
         return new ResponseEntity<Map<String ,Object>>(response, CREATED);
 
